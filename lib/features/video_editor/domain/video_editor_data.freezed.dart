@@ -20,6 +20,7 @@ VideoEditorData _$VideoEditorDataFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$VideoEditorData {
+  String? get songPath => throw _privateConstructorUsedError;
   String? get outputPath => throw _privateConstructorUsedError;
   List<String> get videoPaths => throw _privateConstructorUsedError;
   List<VideoTextData> get videoTexts => throw _privateConstructorUsedError;
@@ -37,7 +38,8 @@ abstract class $VideoEditorDataCopyWith<$Res> {
       _$VideoEditorDataCopyWithImpl<$Res, VideoEditorData>;
   @useResult
   $Res call(
-      {String? outputPath,
+      {String? songPath,
+      String? outputPath,
       List<String> videoPaths,
       List<VideoTextData> videoTexts});
 }
@@ -55,11 +57,16 @@ class _$VideoEditorDataCopyWithImpl<$Res, $Val extends VideoEditorData>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? songPath = freezed,
     Object? outputPath = freezed,
     Object? videoPaths = null,
     Object? videoTexts = null,
   }) {
     return _then(_value.copyWith(
+      songPath: freezed == songPath
+          ? _value.songPath
+          : songPath // ignore: cast_nullable_to_non_nullable
+              as String?,
       outputPath: freezed == outputPath
           ? _value.outputPath
           : outputPath // ignore: cast_nullable_to_non_nullable
@@ -85,7 +92,8 @@ abstract class _$$VideoEditorDataImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? outputPath,
+      {String? songPath,
+      String? outputPath,
       List<String> videoPaths,
       List<VideoTextData> videoTexts});
 }
@@ -101,11 +109,16 @@ class __$$VideoEditorDataImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? songPath = freezed,
     Object? outputPath = freezed,
     Object? videoPaths = null,
     Object? videoTexts = null,
   }) {
     return _then(_$VideoEditorDataImpl(
+      songPath: freezed == songPath
+          ? _value.songPath
+          : songPath // ignore: cast_nullable_to_non_nullable
+              as String?,
       outputPath: freezed == outputPath
           ? _value.outputPath
           : outputPath // ignore: cast_nullable_to_non_nullable
@@ -126,7 +139,8 @@ class __$$VideoEditorDataImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$VideoEditorDataImpl extends _VideoEditorData {
   const _$VideoEditorDataImpl(
-      {this.outputPath,
+      {this.songPath,
+      this.outputPath,
       required final List<String> videoPaths,
       required final List<VideoTextData> videoTexts})
       : _videoPaths = videoPaths,
@@ -136,6 +150,8 @@ class _$VideoEditorDataImpl extends _VideoEditorData {
   factory _$VideoEditorDataImpl.fromJson(Map<String, dynamic> json) =>
       _$$VideoEditorDataImplFromJson(json);
 
+  @override
+  final String? songPath;
   @override
   final String? outputPath;
   final List<String> _videoPaths;
@@ -156,7 +172,7 @@ class _$VideoEditorDataImpl extends _VideoEditorData {
 
   @override
   String toString() {
-    return 'VideoEditorData(outputPath: $outputPath, videoPaths: $videoPaths, videoTexts: $videoTexts)';
+    return 'VideoEditorData(songPath: $songPath, outputPath: $outputPath, videoPaths: $videoPaths, videoTexts: $videoTexts)';
   }
 
   @override
@@ -164,6 +180,8 @@ class _$VideoEditorDataImpl extends _VideoEditorData {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$VideoEditorDataImpl &&
+            (identical(other.songPath, songPath) ||
+                other.songPath == songPath) &&
             (identical(other.outputPath, outputPath) ||
                 other.outputPath == outputPath) &&
             const DeepCollectionEquality()
@@ -176,6 +194,7 @@ class _$VideoEditorDataImpl extends _VideoEditorData {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      songPath,
       outputPath,
       const DeepCollectionEquality().hash(_videoPaths),
       const DeepCollectionEquality().hash(_videoTexts));
@@ -197,7 +216,8 @@ class _$VideoEditorDataImpl extends _VideoEditorData {
 
 abstract class _VideoEditorData extends VideoEditorData {
   const factory _VideoEditorData(
-      {final String? outputPath,
+      {final String? songPath,
+      final String? outputPath,
       required final List<String> videoPaths,
       required final List<VideoTextData> videoTexts}) = _$VideoEditorDataImpl;
   const _VideoEditorData._() : super._();
@@ -205,6 +225,8 @@ abstract class _VideoEditorData extends VideoEditorData {
   factory _VideoEditorData.fromJson(Map<String, dynamic> json) =
       _$VideoEditorDataImpl.fromJson;
 
+  @override
+  String? get songPath;
   @override
   String? get outputPath;
   @override

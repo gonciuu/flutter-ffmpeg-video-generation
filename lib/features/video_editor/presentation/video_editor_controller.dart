@@ -1,5 +1,4 @@
 import 'package:ffmpeg_video_effects/features/video_editor/domain/video_editor_data.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../data/video_editor_repository.dart';
@@ -21,10 +20,27 @@ class VideoEditorController extends _$VideoEditorController {
     state = state.copyWith(videoTexts: [...state.videoTexts, textData]);
   }
 
-  Future<String> concatVideos(String outputPath) {
-    debugPrint("ESSA");
+  void setSongPath(String path) {
+    state = state.copyWith(songPath: path);
+  }
+
+  String addSongToVideoCommand() {
+    if(state.songPath == null) return '';
     return ref
         .read(videoEditorRepositoryProvider)
-        .concatVideos(state.videoPaths, outputPath);
+        .addSongToVideoCommand(state.songPath!);
+  }
+
+  Future<String> concatVideos() async{
+    return await ref
+        .read(videoEditorRepositoryProvider)
+        .concatVideos(state.videoPaths);
+  }
+
+  String wrapCommand(String baseCommand, String outputPath) {
+    return ref.read(videoEditorRepositoryProvider).generateOutput(
+      baseCommand,
+      outputPath,
+    );
   }
 }

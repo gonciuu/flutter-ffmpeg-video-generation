@@ -7,6 +7,7 @@ part 'video_editor_data.g.dart';
 @freezed
 class VideoEditorData with _$VideoEditorData {
   const factory VideoEditorData({
+    String? songPath,
      String? outputPath,
     required List<String> videoPaths,
     required List<VideoTextData> videoTexts,

@@ -5,7 +5,6 @@ import 'package:ffmpeg_kit_flutter_full_gpl/ffmpeg_kit.dart';
 import 'package:ffmpeg_video_effects/features/video_editor/domain/video_editor_data.dart';
 import 'package:ffmpeg_video_effects/features/video_editor/presentation/video_editor_controller.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -136,17 +135,39 @@ class EditorScreen extends HookConsumerWidget {
               ),
               const Divider(),
               ElevatedButton(
-                onPressed: ()async {
-                  debugPrint("ESSA");
+                onPressed: () async {
+                  //show file picker
+                  final result = await FilePicker.platform.pickFiles(
+                      type: FileType.custom,
+                      allowMultiple: false,
+                      allowedExtensions: ['mp3']);
+
+                  if (result != null && result.files.isNotEmpty) {
+                    videoEditorController.setSongPath(result.files.first.path!);
+                  }
+                },
+                child: Text(
+                    'Pick Song ${videoEditorData.songPath?.split('/').last}'),
+              ),
+              const Divider(),
+              ElevatedButton(
+                onPressed: () async {
                   final outputPath = await getOutputPath();
 
-                  debugPrint(outputPath);
+                  String effectsCommand =
+                      await videoEditorController.concatVideos();
 
-                  final String concatCommand =
-                        await videoEditorController.concatVideos(outputPath);
-                    debugPrint(concatCommand);
+                  debugPrint('effectsCommand: $effectsCommand');
 
-                    showVideo(concatCommand);
+                  effectsCommand += " ${videoEditorController.addSongToVideoCommand()}";
+
+                  debugPrint('effectsCommand: $effectsCommand');
+
+
+
+                  final String finalCommand = videoEditorController.wrapCommand(
+                      effectsCommand, outputPath);
+                  showVideo(finalCommand);
                 },
                 child: const Text('Generate Video'),
               ),

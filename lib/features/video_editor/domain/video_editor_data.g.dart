@@ -9,6 +9,7 @@ part of 'video_editor_data.dart';
 _$VideoEditorDataImpl _$$VideoEditorDataImplFromJson(
         Map<String, dynamic> json) =>
     _$VideoEditorDataImpl(
+      songPath: json['songPath'] as String?,
       outputPath: json['outputPath'] as String?,
       videoPaths: (json['videoPaths'] as List<dynamic>)
           .map((e) => e as String)
@@ -21,6 +22,7 @@ _$VideoEditorDataImpl _$$VideoEditorDataImplFromJson(
 Map<String, dynamic> _$$VideoEditorDataImplToJson(
         _$VideoEditorDataImpl instance) =>
     <String, dynamic>{
+      'songPath': instance.songPath,
       'outputPath': instance.outputPath,
       'videoPaths': instance.videoPaths,
       'videoTexts': instance.videoTexts,
