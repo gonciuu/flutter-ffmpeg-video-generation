@@ -250,6 +250,8 @@ mixin _$VideoTextData {
   int get x => throw _privateConstructorUsedError;
   int get y => throw _privateConstructorUsedError;
   String get fontColor => throw _privateConstructorUsedError;
+  double get startTime => throw _privateConstructorUsedError;
+  double get endTime => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -263,7 +265,14 @@ abstract class $VideoTextDataCopyWith<$Res> {
           VideoTextData value, $Res Function(VideoTextData) then) =
       _$VideoTextDataCopyWithImpl<$Res, VideoTextData>;
   @useResult
-  $Res call({String text, int fontSize, int x, int y, String fontColor});
+  $Res call(
+      {String text,
+      int fontSize,
+      int x,
+      int y,
+      String fontColor,
+      double startTime,
+      double endTime});
 }
 
 /// @nodoc
@@ -284,6 +293,8 @@ class _$VideoTextDataCopyWithImpl<$Res, $Val extends VideoTextData>
     Object? x = null,
     Object? y = null,
     Object? fontColor = null,
+    Object? startTime = null,
+    Object? endTime = null,
   }) {
     return _then(_value.copyWith(
       text: null == text
@@ -306,6 +317,14 @@ class _$VideoTextDataCopyWithImpl<$Res, $Val extends VideoTextData>
           ? _value.fontColor
           : fontColor // ignore: cast_nullable_to_non_nullable
               as String,
+      startTime: null == startTime
+          ? _value.startTime
+          : startTime // ignore: cast_nullable_to_non_nullable
+              as double,
+      endTime: null == endTime
+          ? _value.endTime
+          : endTime // ignore: cast_nullable_to_non_nullable
+              as double,
     ) as $Val);
   }
 }
@@ -318,7 +337,14 @@ abstract class _$$VideoTextDataImplCopyWith<$Res>
       __$$VideoTextDataImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String text, int fontSize, int x, int y, String fontColor});
+  $Res call(
+      {String text,
+      int fontSize,
+      int x,
+      int y,
+      String fontColor,
+      double startTime,
+      double endTime});
 }
 
 /// @nodoc
@@ -337,6 +363,8 @@ class __$$VideoTextDataImplCopyWithImpl<$Res>
     Object? x = null,
     Object? y = null,
     Object? fontColor = null,
+    Object? startTime = null,
+    Object? endTime = null,
   }) {
     return _then(_$VideoTextDataImpl(
       text: null == text
@@ -359,6 +387,14 @@ class __$$VideoTextDataImplCopyWithImpl<$Res>
           ? _value.fontColor
           : fontColor // ignore: cast_nullable_to_non_nullable
               as String,
+      startTime: null == startTime
+          ? _value.startTime
+          : startTime // ignore: cast_nullable_to_non_nullable
+              as double,
+      endTime: null == endTime
+          ? _value.endTime
+          : endTime // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -371,7 +407,9 @@ class _$VideoTextDataImpl implements _VideoTextData {
       required this.fontSize,
       required this.x,
       required this.y,
-      required this.fontColor});
+      required this.fontColor,
+      required this.startTime,
+      required this.endTime});
 
   factory _$VideoTextDataImpl.fromJson(Map<String, dynamic> json) =>
       _$$VideoTextDataImplFromJson(json);
@@ -386,10 +424,14 @@ class _$VideoTextDataImpl implements _VideoTextData {
   final int y;
   @override
   final String fontColor;
+  @override
+  final double startTime;
+  @override
+  final double endTime;
 
   @override
   String toString() {
-    return 'VideoTextData(text: $text, fontSize: $fontSize, x: $x, y: $y, fontColor: $fontColor)';
+    return 'VideoTextData(text: $text, fontSize: $fontSize, x: $x, y: $y, fontColor: $fontColor, startTime: $startTime, endTime: $endTime)';
   }
 
   @override
@@ -403,12 +445,16 @@ class _$VideoTextDataImpl implements _VideoTextData {
             (identical(other.x, x) || other.x == x) &&
             (identical(other.y, y) || other.y == y) &&
             (identical(other.fontColor, fontColor) ||
-                other.fontColor == fontColor));
+                other.fontColor == fontColor) &&
+            (identical(other.startTime, startTime) ||
+                other.startTime == startTime) &&
+            (identical(other.endTime, endTime) || other.endTime == endTime));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, text, fontSize, x, y, fontColor);
+  int get hashCode => Object.hash(
+      runtimeType, text, fontSize, x, y, fontColor, startTime, endTime);
 
   @JsonKey(ignore: true)
   @override
@@ -430,7 +476,9 @@ abstract class _VideoTextData implements VideoTextData {
       required final int fontSize,
       required final int x,
       required final int y,
-      required final String fontColor}) = _$VideoTextDataImpl;
+      required final String fontColor,
+      required final double startTime,
+      required final double endTime}) = _$VideoTextDataImpl;
 
   factory _VideoTextData.fromJson(Map<String, dynamic> json) =
       _$VideoTextDataImpl.fromJson;
@@ -445,6 +493,10 @@ abstract class _VideoTextData implements VideoTextData {
   int get y;
   @override
   String get fontColor;
+  @override
+  double get startTime;
+  @override
+  double get endTime;
   @override
   @JsonKey(ignore: true)
   _$$VideoTextDataImplCopyWith<_$VideoTextDataImpl> get copyWith =>

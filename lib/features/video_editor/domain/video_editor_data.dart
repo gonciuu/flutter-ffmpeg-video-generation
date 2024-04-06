@@ -30,6 +30,8 @@ class VideoTextData with _$VideoTextData {
     required int x,
     required int y,
     required String fontColor,
+    required double startTime,
+    required double endTime,
   }) = _VideoTextData;
 
   factory VideoTextData.fromJson(Map<String, dynamic> json) =>

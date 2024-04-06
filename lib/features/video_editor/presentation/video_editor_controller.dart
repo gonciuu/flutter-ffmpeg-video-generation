@@ -37,7 +37,15 @@ class VideoEditorController extends _$VideoEditorController {
         .concatVideos(state.videoPaths);
   }
 
+
+  String fadeTextVideoCommand(String inputPath, String outputPath) {
+    return ref
+        .read(videoEditorRepositoryProvider)
+        .fadeTextVideoCommand(inputPath, outputPath);
+  }
+
   String wrapCommand(String baseCommand, String outputPath) {
+
     return ref.read(videoEditorRepositoryProvider).generateOutput(
       baseCommand,
       outputPath,

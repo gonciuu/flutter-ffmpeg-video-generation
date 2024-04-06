@@ -69,14 +69,27 @@ class EditorScreen extends HookConsumerWidget {
 
     Future<void> pickVideoHandler() async {
       isPickingVideo.value = true;
-      final result = await FilePicker.platform
-          .pickFiles(type: FileType.video, allowMultiple: true);
+      final result = await FilePicker.platform.pickFiles(
+          type: FileType.video, allowMultiple: true, allowCompression: false);
 
       if (result != null && result.files.isNotEmpty) {
         videoEditorController
             .setPaths(result.files.map((e) => e.path ?? '').toList());
       }
       isPickingVideo.value = false;
+    }
+
+    Future<void> addTextHandler() async {
+      const textData = VideoTextData(
+        text: 'Sample Text',
+        fontSize: 64,
+        x: 100,
+        y: 100,
+        fontColor: 'white',
+        startTime: 0,
+        endTime: 5,
+      );
+      videoEditorController.addText(textData);
     }
 
     useEffect(() {
@@ -151,23 +164,45 @@ class EditorScreen extends HookConsumerWidget {
               ),
               const Divider(),
               ElevatedButton(
+                onPressed: addTextHandler,
+                child: const Text('Add Text'),
+              ),
+              Container(
+                constraints: const BoxConstraints(maxHeight: 200),
+                child: Scrollbar(
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: videoEditorData.videoTexts.length,
+                    itemBuilder: (context, index) {
+                      final textData = videoEditorData.videoTexts[index];
+                      return ListTile(
+                        title: Text(
+                            "${index + 1}. ${textData.text} ${textData.startTime} - ${textData.endTime}"),
+                      );
+                    },
+                  ),
+                ),
+              ),
+              const Divider(),
+              ElevatedButton(
                 onPressed: () async {
                   final outputPath = await getOutputPath();
 
                   String effectsCommand =
                       await videoEditorController.concatVideos();
 
-                  debugPrint('effectsCommand: $effectsCommand');
-
-                  effectsCommand += " ${videoEditorController.addSongToVideoCommand()}";
-
-                  debugPrint('effectsCommand: $effectsCommand');
-
-
+                  effectsCommand +=
+                      " ${videoEditorController.addSongToVideoCommand()}";
 
                   final String finalCommand = videoEditorController.wrapCommand(
                       effectsCommand, outputPath);
-                  showVideo(finalCommand);
+
+
+                  final stringlol = videoEditorController.fadeTextVideoCommand(
+                      videoEditorData.videoPaths.first, outputPath);
+
+                  debugPrint(finalCommand);
+                  showVideo(stringlol);
                 },
                 child: const Text('Generate Video'),
               ),

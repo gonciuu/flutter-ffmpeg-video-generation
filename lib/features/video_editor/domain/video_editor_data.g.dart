@@ -35,6 +35,8 @@ _$VideoTextDataImpl _$$VideoTextDataImplFromJson(Map<String, dynamic> json) =>
       x: json['x'] as int,
       y: json['y'] as int,
       fontColor: json['fontColor'] as String,
+      startTime: (json['startTime'] as num).toDouble(),
+      endTime: (json['endTime'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$$VideoTextDataImplToJson(_$VideoTextDataImpl instance) =>
@@ -44,4 +46,6 @@ Map<String, dynamic> _$$VideoTextDataImplToJson(_$VideoTextDataImpl instance) =>
       'x': instance.x,
       'y': instance.y,
       'fontColor': instance.fontColor,
+      'startTime': instance.startTime,
+      'endTime': instance.endTime,
     };
